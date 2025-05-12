@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Divya">
+    <meta name="description" content="Place your order at The Little Taco Shop">
+    <title>Place Your Order - The Little Taco Shop</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+        }
+
+        input, select, textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .menu-item input {
+            width: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Place Your Order</h1>
+        <form id="orderForm">
+            <fieldset>
+                <legend>Select Your Items</legend>
+                <div class="menu-item">
+                    <label for="taco">Panner Tikka Crunchy Tacos  -  120 Rs/-</label>
+                    <input type="number" id="taco" name="taco" min="0" step="1" value="0">
+                </div>
+                <div class="menu-item">
+                    <label for="burrito">Chicken Crunchy Tacos  -  150 Rs/-</label>
+                    <input type="number" id="burrito" name="burrito" min="0" step="1" value="0">
+                </div>
+                <div class="menu-item">
+                    <label for="quesadilla">Cheese Soft Tacos  -  130 Rs/-</label>
+                    <input type="number" id="quesadilla" name="quesadilla" min="0" step="1" value="0">
+                </div>
+                <div class="menu-item">
+                    <label for="cornCheeseTacos">Corn Cheese Tacos  -  120 Rs/-</label>
+                    <input type="number" id="cornCheeseTacos" name="cornCheeseTacos" min="0" step="1" value="0">
+                </div>
+                <div class="menu-item">
+                    <label for="veggiesTacos">Veggies Tacos  -  100 Rs/-</label>
+                    <input type="number" id="veggiesTacos" name="veggiesTacos" min="0" step="1" value="0">
+                </div>
+                <div class="menu-item">
+                    <label for="grilledChickenTacos">Grilled Chicken Tacos  -  160 Rs/-</label>
+                    <input type="number" id="grilledChickenTacos" name="grilledChickenTacos" min="0" step="1" value="0">
+                </div>
+                <div class="menu-item">
+                    <label for="coke">Coke  -  40 Rs/-</label>
+                    <input type="number" id="coke" name="coke" min="0" step="1" value="0">
+                </div>
+                <div class="menu-item">
+                    <label for="fanta">Fanta  -  40 Rs/-</label>
+                    <input type="number" id="fanta" name="fanta" min="0" step="1" value="0">
+                </div>
+                <div class="menu-item">
+                    <label for="limca">Limca  -  45 Rs/-</label>
+                    <input type="number" id="limca" name="limca" min="0" step="1" value="0">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Delivery Information</legend>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </fieldset>
+            <button type="button" onclick="submitOrder()">Submit Order</button>
+        </form>
+    </div>
+
+    <script>
+        function submitOrder() {
+            // Retrieve form data
+            var name = document.getElementById('name').value.trim();
+            var address = document.getElementById('address').value.trim();
+            var phone = document.getElementById('phone').value.trim();
+            var taco_qty = parseInt(document.getElementById('taco').value.trim());
+            var burrito_qty = parseInt(document.getElementById('burrito').value.trim());
+            var quesadilla_qty = parseInt(document.getElementById('quesadilla').value.trim());
+            var cornCheeseTacos_qty = parseInt(document.getElementById('cornCheeseTacos').value.trim());
+            var veggiesTacos_qty = parseInt(document.getElementById('veggiesTacos').value.trim());
+            var grilledChickenTacos_qty = parseInt(document.getElementById('grilledChickenTacos').value.trim());
+            var coke_qty = parseInt(document.getElementById('coke').value.trim());
+            var fanta_qty = parseInt(document.getElementById('fanta').value.trim());
+            var limca_qty = parseInt(document.getElementById('limca').value.trim());
+
+            // Prepare order object
+            var order = {
+                name: name,
+                address: address,
+                phone: phone,
+                taco_qty: taco_qty,
+                burrito_qty: burrito_qty,
+                quesadilla_qty: quesadilla_qty,
+                cornCheeseTacos_qty: cornCheeseTacos_qty,
+                veggiesTacos_qty: veggiesTacos_qty,
+                grilledChickenTacos_qty: grilledChickenTacos_qty,
+                coke_qty: coke_qty,
+                fanta_qty: fanta_qty,
+                limca_qty: limca_qty
+            };
+
+            // Get existing orders from localStorage or initialize an empty array
+            var orders = JSON.parse(localStorage.getItem('orders')) || [];
+
+            // Add the new order to the orders array
+            orders.push(order);
+
+            // Store the updated orders array back in localStorage
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // Reset the form
+            document.getElementById('orderForm').reset();
+
+            // Optionally, show a confirmation message to the user
+            alert('Order submitted successfully!');
+        }
+    </script>
+</body>
+
+</html>
